@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Number Heroes – Boss Rush Edition (Mobile)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/andy" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/elsone" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/css/mobile.css">
+</head>
+<body>
+
+<button id="soundMasterBtn" onclick="toggleAllSounds()">🔊 SOUND: ON</button>
+
+<audio id="bgMusic" loop></audio>
+<audio id="clickSound" src="https://freesound.org/data/previews/64/64580_634166-lq.mp3"></audio>
+<audio id="bipSound" src="https://freesound.org/data/previews/320/320655_5260872-lq.mp3"></audio>
+<audio id="attackSound" src="https://static.wikia.nocookie.net/terraria_gamepedia/images/5/53/Dd2_ogre_hurt_0.wav"></audio>
+<audio id="wrongSound" src="https://freesound.org/data/previews/109/109662_945474-lq.mp3"></audio>
+<audio id="swingSound" src="https://static.wikia.nocookie.net/terraria_gamepedia/images/d/d5/Dd2_monk_staff_swing_2.wav"></audio>
+<audio id="enemyDeathSound" src="https://static.wikia.nocookie.net/terraria_gamepedia/images/4/45/Dd2_ogre_attack_2.wav"></audio>
+<audio id="gameOverSound" src="https://cdn.pixabay.com/download/audio/2025/06/02/audio_829fcaa169.mp3"></audio>
+<audio id="bossSpawnSound" src="https://static.wikia.nocookie.net/terraria_gamepedia/images/6/61/Roar_0.wav"></audio>
+<audio id="upgradeSound" src="https://freesound.org/data/previews/341/341629_5966340-lq.mp3"></audio>
+<audio id="lootSound" src="https://freesound.org/data/previews/341/341629_5966340-lq.mp3"></audio>
+<audio id="whipSound" src="https://static.wikia.nocookie.net/terraria_gamepedia/images/4/4c/Item_152.wav"></audio>
+<audio id="devourPrideSound" src="https://terraria.wiki.gg/images/Dd2_sky_dragons_fury_shot_0.wav"></audio>
+<audio id="buySound" src="https://cdn.pixabay.com/audio/2025/08/05/audio_92c853a122.mp3"></audio>
+
+<div id="dialogueBox">
+    <div id="dialogueCloseBtn" onclick="closeDialogue()" style="position:absolute; top:5px; right:5px; border:1px solid white; padding:2px; cursor:pointer;">X</div>
+    <div id="dialogueContent"></div>
+</div>
+
+<section id="weaponTest">
+    <h1 style="color: #00ff00;">⚔️ WEAP Test</h1>
+    <div id="testStats">
+        <p>Weapon: <span id="testWeaponName" style="color: gold;">NONE</span></p>
+        <p>Base Dmg: <span id="testBaseDmg" style="color: cyan;">0</span></p>
+        <p>Weapon: <span id="testWeaponDmg" style="color: cyan;">0</span></p>
+        <p style="font-size: 12px;">Total: <span id="testTotalDmg" style="color: yellow;">0</span></p>
+    </div>
+
+    <div id="weaponTestArea">
+        <div id="testHeroWrapper">
+            <img id="testHeroImg" src="" alt="hero">
+            <img id="testWeaponOverlay" src="" alt="weapon">
+        </div>
+        <div style="position: relative;">
+            <img id="testDummy" src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/94/Target_Dummy.png" alt="dummy">
+            <div id="damagePopups"></div>
+        </div>
+    </div>
+
+    <button id="hitBtn" onclick="hitDummy()">👊 HIT!</button>
+
+    <div style="margin-top: 15px;">
+        <button class="menu-btn" onclick="showSection('shop')">⬅ Shop</button>
+    </div>
+</section>
+
+<section id="credits">
+    <h1 style="color: gold;">CREDITS</h1>
+    <div style="background: rgba(0,0,128,0.8); border: 4px solid white; padding: 15px; max-width: 90%; margin: 15px auto;">
+        <p style="color: white; font-size: 9px;">CREATED BY</p>
+        <h2 style="color: cyan; font-size: 14px;">KREY</h2>
+        <br>
+        <p style="color: white; font-size: 9px;">HELPER</p>
+        <h2 style="color: lime; font-size: 14px;">MENG MARIZA</h2>
+        <br>
+        <p style="color : white; font-size : 9px;">SPECIAL THANKS TO</p>
+        <h2 style="color: gold; font-size: 14px;">TERRARIA</h2>
+    </div>
+    <button class="menu-btn" onclick="showSection('menu')">⬅ Menu</button>
+</section>
+
+<section id="auth" class="active">
+    <img src="https://image2url.com/r2/default/images/1774316344625-bb1cf5bb-b35e-42b7-bdf2-3d6351138223.png" alt="PLAYER LOGIN" style="max-width: 90%; margin: 15px auto; display: block;">
+    <div style="background: rgba(0,0,0,0.7); border: 4px solid white; padding: 15px; max-width: 90%; margin: 15px auto;">
+        <input type="text" id="usernameInput" placeholder="NAME" style="font-size: 14px; width: 180px;">
+        <input type="password" id="passwordInput" placeholder="PASSWORD" style="font-size: 14px; width: 180px;">
+        <br>
+        <button class="menu-btn" onclick="attemptLogin()" style="border-color: lime; color: lime; font-size: 10px;">LOGIN</button>
+        <button class="menu-btn" onclick="attemptRegister()" style="border-color: cyan; color: cyan; font-size: 10px;">CREATE</button>
+    </div>
+</section>
+
+<section id="menu">
+    <img src="https://image2url.com/r2/default/images/1774316224934-de1190ad-b500-4446-a10f-53c84dfaab45.png" alt="MATHERIA" style="max-width: 90%; margin: 15px auto; display: block;">
+    <div style="font-size: 7px; margin-bottom: 8px; color: #ffcccc; text-shadow: 2px 2px 4px #000;">WELCOME, <span id="playerNameDisplay" style="color:#ff6666; text-shadow: 2px 2px 4px #000;">HERO</span></div>
+
+    <div class="mobile-menu-grid">
+        <button class="menu-btn" onclick="rpgClick('Preparing journey...', 'difficulty')">▶️ QUEST</button>
+        <button class="menu-btn" onclick="showQuest()">📋</button>
+        <button class="menu-btn" onclick="rpgClick('Entering Armory...', 'shop')">⚔️ SHOP</button>
+        <button class="menu-btn" onclick="showSection('petshop')">🐾 PETS</button>
+        <button class="menu-btn" onclick="openBackpack()">🎒 BAG</button>
+        <button class="menu-btn" onclick="rpgClick('Entering Workshop...', 'crafting')">🔨 CRAFT</button>
+        <button class="menu-btn" onclick="showSection('practice')" style="border-color: #00ff00; color: #00ff00;">📝 PRACT</button>
+        <button class="menu-btn admin-btn" onclick="runAdminPrompt()">⚡ ADMIN</button>
+    </div>
+
+    <div style="margin:12px; color: #ffcc66; text-shadow: 2px 2px 4px #000; font-size: 9px;">
+        GOLD: <span id="goldDisplay">0</span><br>
+        LVL: <span id="lvlDisplayMenu">1</span>/500<br>
+        REBIRTH: <span id="resetDisplay" style="color: #ff99ff;">0</span>/100
+    </div>
+
+    <button class="menu-btn" onclick="logout()" style="border-color: red; color: red; font-size: 8px; margin-top: 10px;">⏻ LOGOUT</button>
+    <button class="menu-btn" style="margin-top: 5px;" onclick="showSection('credits')">📜 CREDITS</button>
+</section>
+
+<section id="shop">
+    <h1 style="color: gold; font-size: 16px;">⚔️ ARMORY</h1>
+    <div style="color: gold; margin-bottom: 8px; font-size: 10px;">GOLD: <span id="goldShop">0</span></div>
+
+    <div class="upgrade-container">
+        <h3 style="margin:5px; color:cyan; font-size: 11px;">UPGRADES</h3>
+        <div style="font-size:9px; margin-bottom:8px;">
+            HP: <span id="statMaxHp" class="stat-val">100</span> | DMG: <span id="statBaseDmg" class="stat-val">0</span>
+        </div>
+        <div class="mobile-upgrade-btns">
+            <button class="upgrade-btn" onclick="buyUpgrade('HP')">❤️ +HP<br><span id="costHp" style="font-size:8px;">200G</span></button>
+            <button class="upgrade-btn" onclick="buyUpgrade('DMG')">⚔️ +DMG<br><span id="costDmg" style="font-size:8px;">200G</span></button>
+        </div>
+    </div>
+
+    <div id="shopGrid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; max-width:100%; margin:10px auto;">
+        <div class="menu-btn shop-item" onclick="buyItem('POTION', 50)"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/6/67/Recall_Potion.png" class="shop-icon">POT</div>
+        <div class="menu-btn shop-item" onclick="buyItem('POTION_ONE', 100)" style="border-color: pink; color: pink;"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/9f/Flask_of_Party.png" class="shop-icon">PARTY</div>
+        <div class="menu-btn shop-item" onclick="buyItem('SWORD', 150)"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/a/ab/Falcon_Blade.png" class="shop-icon">SWORD</div>
+        <div class="menu-btn shop-item" onclick="buyItem('CRYSTAL', 5000)" style="border-color: #ff00ff; color: #ff00ff;"><img src="https://terraria.wiki.gg/images/Crystal_Shard.png" class="shop-icon">CRYST</div>
+        <div class="menu-btn shop-item" onclick="buyItem('STARDUST', 10000)" style="border-color: #88ccee; color: #88ccee;"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a9/Stardust_Dragon_Staff.png" class="shop-icon">STAR</div>
+        <div class="menu-btn shop-item" onclick="buyItem('HORNET_STAFF', 1200)"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/4/4f/Hornet_Staff.png" class="shop-icon">HORN</div>
+        <div class="menu-btn shop-item" onclick="buyItem('MASTER_SWORD', 4500)"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/1/13/Light%27s_Bane.png" class="shop-icon">MASTR</div>
+        <div class="menu-btn shop-item" onclick="buyItem('FROST_STAFF', 18000)" style="border-color: cyan;"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/2/20/Staff_of_the_Frost_Hydra.png" class="shop-icon">FROST</div>
+        <div class="menu-btn shop-item" onclick="buyItem('STARDUST_STAFF', 45000)" style="border-color: #88ccee;"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a9/Stardust_Dragon_Staff.png" class="shop-icon">STDust</div>
+        <div class="menu-btn shop-item" onclick="buyItem('VOID_SWORD', 66666)" style="border-color: purple; color: purple;"><img src="https://i.pinimg.com/originals/51/78/34/517834b4965a7a984d934f68ace0774a.gif" class="shop-icon">VOID</div>
+        <div class="menu-btn shop-item" onclick="buyItem('CRYSTAL_STAFF', 76000)" style="border-color: #ff00ff; color: #ff00ff;"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/1/13/Rainbow_Crystal_Staff.png" class="shop-icon">CRYSTL</div>
+        <div class="menu-btn shop-item" onclick="buyItem('KAIDO_WHIP', 150000)" style="border-color: cyan; color: cyan;"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/8/86/Kaleidoscope.png" class="shop-icon">KAIDO</div>
+        <div class="menu-btn shop-item" onclick="buyItem('TERRAPRISMA', 500000)" style="border-color: gold; color: gold;"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/b/b0/Terraprisma.png" class="shop-icon">TERRA</div>
+        <div class="menu-btn rebirth-btn" onclick="triggerReset()">✨ REBIRTH</div>
+    </div>
+    <br>
+    <button class="menu-btn" onclick="showSection('menu')">⬅ MENU</button>
+</section>
+
+<section id="petshop">
+    <h1 style="color: #ff69b4; font-size: 16px;">🐾 PET SHOP</h1>
+    <div style="color: gold; margin-bottom: 8px; font-size: 10px;">GOLD: <span id="goldPetShop">0</span></div>
+    <div style="font-size: 9px; color: #ffcccc; margin-bottom: 8px;">Pets follow you! Life Spirit = second chance.</div>
+
+    <div id="petShopGrid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; max-width:100%; margin:auto;">
+    </div>
+
+    <div class="upgrade-container" style="border-color: #ff69b4; margin-top: 12px; padding: 8px;">
+        <h3 style="margin:3px; color:#ff69b4; font-size: 11px;">CURRENT PET</h3>
+        <div id="currentPetDisplay" style="font-size:9px; color:white;">None</div>
+        <div id="petStatsDisplay" style="font-size:9px; color:lime;">DMG: 0</div>
+    </div>
+
+    <br>
+    <button class="menu-btn" onclick="showSection('menu')">⬅ MENU</button>
+</section>
+
+<section id="backpack">
+    <h1 style="color: #00ff00; font-size: 16px;">🎒 BACKPACK</h1>
+    <div style="font-size:9px; color:gray; margin-bottom:8px;">TAP ITEM TO EQUIP</div>
+    <div id="backpackGrid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; max-width:100%; margin:auto;">
+    </div>
+    <br>
+    <button class="menu-btn" onclick="showSection('menu')">⬅ MENU</button>
+</section>
+
+<section id="crafting">
+    <h1 style="color: #ffaa00; font-size: 16px;">🔨 WORKSHOP</h1>
+    <div style="font-size:9px; color:gray; margin-bottom:8px;">FORGE NEW POWER!</div>
+
+    <div class="upgrade-container" style="border-color: #ffaa00; padding: 10px;">
+        <h3 style="margin:5px; color:white; font-size: 11px;">RECIPES</h3>
+
+        <div style="border: 2px dashed gray; padding: 8px; margin-bottom: 8px; text-align: left;">
+            <img src="https://terraria.wiki.gg/images/Lead_Broadsword.png" style="width: 30px; height: 30px; object-fit: contain; vertical-align: middle; margin-right: 8px;">
+            <div style="display: inline-block; vertical-align: middle; width: calc(100% - 45px);">
+                <div style="font-size: 9px; color: cyan; margin-bottom: 3px;">LEAD BROADSWORD</div>
+                <div style="font-size: 8px; color: lime;">DMG: 190</div>
+                <div style="font-size: 8px; color: white;">Need: 1x SWORD, 1x POTION</div>
+            </div>
+            <button class="menu-btn" onclick="craftItem('LEAD_BROADSWORD')" style="font-size: 8px; border-color: #ffaa00; color: #ffaa00; display: block; width: 100%; margin-top: 5px;">CRAFT</button>
+        </div>
+
+        <div style="border: 2px dashed #ff00ff; padding: 8px; margin-bottom: 8px; text-align: left;">
+            <img src="https://terraria.wiki.gg/images/Brand_of_the_Inferno.png" style="width: 30px; height: 30px; object-fit: contain; vertical-align: middle; margin-right: 8px;">
+            <div style="display: inline-block; vertical-align: middle; width: calc(100% - 45px);">
+                <div style="font-size: 9px; color: #ff00ff; margin-bottom: 3px;">BRAND OF INFERNO</div>
+                <div style="font-size: 8px; color: lime;">DMG: 450</div>
+                <div style="font-size: 8px; color: white;">Need: CRYSTAL + STARDUST</div>
+            </div>
+            <button class="menu-btn" onclick="craftItem('BRAND_OF_INFERNO')" style="font-size: 8px; border-color: #ff00ff; color: #ff00ff; display: block; width: 100%; margin-top: 5px;">CRAFT</button>
+        </div>
+
+        <div style="border: 2px dashed #ff4400; padding: 8px; margin-bottom: 8px; text-align: left;">
+            <img src="https://terraria.wiki.gg/images/Volcano.png" style="width: 30px; height: 30px; object-fit: contain; vertical-align: middle; margin-right: 8px;">
+            <div style="display: inline-block; vertical-align: middle; width: calc(100% - 45px);">
+                <div style="font-size: 9px; color: #ff4400; margin-bottom: 3px;">VOLCANO</div>
+                <div style="font-size: 8px; color: lime;">DMG: 67K</div>
+                <div style="font-size: 8px; color: white;">Need: HORNET + BRAND</div>
+                <div style="font-size: 8px; color: gold;">Cost: 700k</div>
+            </div>
+            <button class="menu-btn" onclick="craftItem('VOLCANO')" style="font-size: 8px; border-color: #ff4400; color: #ff4400; display: block; width: 100%; margin-top: 5px;">CRAFT</button>
+        </div>
+
+        <div style="border: 2px dashed gold; padding: 8px; margin-bottom: 8px; text-align: left; box-shadow: 0 0 10px gold;">
+            <img src="https://terraria.wiki.gg/images/Eventide.png" style="width: 30px; height: 30px; object-fit: contain; vertical-align: middle; margin-right: 8px;">
+            <div style="display: inline-block; vertical-align: middle; width: calc(100% - 45px);">
+                <div style="font-size: 9px; color: gold; margin-bottom: 3px;">DEVOUR PRIDE</div>
+                <div style="font-size: 8px; color: lime;">DMG: 9M</div>
+                <div style="font-size: 8px; color: white;">Need: TERRA + KAIDO</div>
+                <div style="font-size: 8px; color: gold;">Cost: 2.8M</div>
+                <div style="font-size: 8px; color: #ff00ff;">6 Rebirths</div>
+            </div>
+            <button class="menu-btn" onclick="craftItem('DEVOUR_PRIDE')" style="font-size: 8px; border-color: gold; color: gold; display: block; width: 100%; margin-top: 5px;">CRAFT</button>
+        </div>
+
+    </div>
+
+    <br>
+    <button class="menu-btn" onclick="showSection('menu')">⬅ MENU</button>
+</section>
+
+<section id="practice">
+    <h1 style="color: #00ff00; font-size: 16px;">📝 PRACTICE</h1>
+    <div style="background: rgba(0,0,0,0.8); border: 4px solid #00ff00; padding: 15px; max-width: 95%; margin: 15px auto;">
+        <h3 style="color: white; font-size: 11px;">CREATE QUIZ</h3>
+
+        <div style="margin: 12px 0;">
+            <label style="color: white; font-size: 9px; display: block; margin-bottom: 4px;">TIME (sec):</label>
+            <input type="number" id="practiceTime" value="30" min="5" max="120" style="width: 80px; font-size: 12px;">
+        </div>
+
+        <div id="practiceQuestions" style="margin: 12px 0;">
+            <h4 style="color: cyan; font-size: 9px;">QUESTIONS:</h4>
+            <div class="practice-question-item" style="background: rgba(255,255,255,0.1); padding: 8px; margin: 8px 0; border: 2px solid gray;">
+                <input type="text" placeholder="Question" class="practice-q" style="width: 100%; margin: 3px 0; font-size: 9px;">
+                <input type="number" placeholder="Answer" class="practice-a" style="width: 100%; margin: 3px 0; font-size: 9px;">
+            </div>
+        </div>
+
+        <button class="menu-btn" onclick="addPracticeQuestion()" style="border-color: cyan; color: cyan; font-size: 9px; padding: 6px;">+ ADD</button>
+        <br><br>
+        <button class="menu-btn" onclick="startPracticeMode()" style="border-color: lime; color: lime; font-size: 10px;">START</button>
+    </div>
+    <button class="menu-btn" onclick="showSection('menu')">⬅ MENU</button>
+</section>
+
+<section id="practiceGame">
+    <h1 style="color: #00ff00; font-size: 16px;">PRACTICE</h1>
+    <div id="practiceTimer" style="font-size: 12px; color: #ff3333; margin: 8px;">TIME: <span id="practiceTimeDisplay">30</span>s</div>
+    <div style="font-size: 10px; color: white; margin: 8px;">Q <span id="practiceQuestionNum">1</span> / <span id="practiceTotalQuestions">1</span></div>
+
+    <h2 id="practiceQuestion" style="color: white; font-size: 13px; margin: 15px; text-align: center;">?</h2>
+    <input type="text" id="practiceAnswer" placeholder="Answer" autocomplete="off" style="font-size: 14px; width: 160px; padding: 8px; text-align: center;">
+    <br><br>
+
+    <div id="practiceAIFeedback" style="display: none; background: rgba(255,0,0,0.8); border: 3px solid red; padding: 12px; margin: 15px auto; max-width: 90%; font-size: 9px; color: white;">
+        <h3 style="color: yellow; font-size: 11px;">❌ WRONG!</h3>
+        <p>Correct: <span id="practiceCorrectAnswer" style="color: lime; font-size: 12px;">?</span></p>
+        <p id="practiceExplanation" style="color: white; margin-top: 8px;"></p>
+    </div>
+
+    <button class="menu-btn" onclick="checkPracticeAnswer()" style="font-size: 10px;">✓ SUBMIT</button>
+    <button class="menu-btn" onclick="quitPractice()" style="border-color: red; color: red; font-size: 10px;">✕ QUIT</button>
+</section>
+
+<section id="quest">
+    <h1 style="color: gold; font-size: 16px; text-shadow: 2px 2px #000;">QUEST</h1>
+    <div id="questInfo" style="background: rgba(0,0,0,0.8); border: 4px solid gold; padding: 15px; max-width: 95%; margin: 15px auto;">
+        <h2 id="questTitle" style="color: lime; font-size: 12px; margin-bottom: 12px;">CURRENT QUEST</h2>
+        <p id="questDesc" style="color: white; font-size: 10px; margin-bottom: 8px;">Loading...</p>
+        <p id="questProgress" style="color: yellow; font-size: 9px;">Progress: 0/1</p>
+    </div>
+    <button class="menu-btn" onclick="startQuest()">▶ START</button>
+    <br><br>
+    <button class="menu-btn" onclick="showSection('menu')">⬅ MENU</button>
+</section>
+
+<section id="difficulty">
+    <h1 style="font-size: 16px;">SELECT MODE</h1>
+    <button class="menu-btn" onclick="selectDifficulty('Easy')">EASY<br><span style="font-size:5px">+ - × ÷</span></button>
+    <button class="menu-btn" onclick="selectDifficulty('Normal')">NORMAL<br><span style="font-size:5px">Gr 5-6</span></button>
+    <button class="menu-btn" onclick="selectDifficulty('Hard')">HARD<br><span style="font-size:5px">Gr 7-9</span></button>
+    <br><button class="menu-btn" onclick="showSection('menu')">⬅ BACK</button>
+</section>
+
+<section id="landing">
+    <h1 style="font-size: 16px;">CHOOSE HERO</h1>
+    <div class="age" onclick="selectAge(5,this)">👶 5-6</div>
+    <div class="age" onclick="selectAge(7,this)">🧒 7-10</div>
+    <div class="age" onclick="selectAge(11,this)">🧠 11+</div><br>
+
+    <div id="hero-Addy" class="hero" onclick="selectHero('Addy',this)">➕ ADDY</div>
+    <div id="hero-Subtra" class="hero locked" onclick="selectHero('Subtra',this)">➖ SUBTRA<br><span style="font-size:6px">800G</span></div>
+    <div id="hero-Max" class="hero locked" onclick="selectHero('Max',this)">✖️ MAX<br><span style="font-size:6px">2.5k</span></div>
+    <div id="hero-Divina" class="hero locked" onclick="selectHero('Divina',this)">➗ DIVINA<br><span style="font-size:6px">5k</span></div>
+    <div id="hero-Lastly" class="hero locked" onclick="selectHero('Lastly',this)">✨ LATELY<br><span style="font-size:6px">20k</span></div><br>
+
+    <button class="menu-btn" onclick="startGame()">▶ BATTLE!</button>
+    <button class="menu-btn" onclick="quitToMenuFromLanding()" style="border-color:#ff4444; color:#ff4444; font-size: 10px;">⬅ BACK</button>
+</section>
+
+<section id="game">
+    <button id="skipBossBtn" onclick="skipBoss()">⏩ SKIP BOSS</button>
+    <div id="damageText"></div>
+
+    <div id="aiFeedback">
+        <h3>❌ WRONG!</h3>
+        <p>Answer: <span class="correct-answer" id="aiCorrectAnswer">?</span></p>
+        <p id="aiExplanation" style="margin-top: 8px;"></p>
+        <button class="menu-btn" onclick="closeAIFeedback()" style="margin-top: 10px; font-size: 9px;">CONTINUE</button>
+    </div>
+
+    <!-- BATTLE STAGE - Mobile Optimized -->
+    <div class="battle-stage-mobile">
+        <img id="lootDrop" src="" alt="Loot">
+
+        <!-- POTION EXPLOSIONS -->
+        <svg id="potionExplosion" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="75" cy="75" r="60" fill="rgba(0,255,255,0.4)" stroke="cyan" stroke-width="4"/>
+            <circle cx="75" cy="75" r="40" fill="rgba(0,200,255,0.6)" stroke="blue" stroke-width="3"/>
+            <circle cx="75" cy="75" r="20" fill="rgba(100,200,255,0.8)" stroke="white" stroke-width="2"/>
+        </svg>
+
+        <svg id="potionOneExplosion" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="75" cy="75" r="60" fill="rgba(255,100,200,0.4)" stroke="pink" stroke-width="4"/>
+            <circle cx="75" cy="75" r="40" fill="rgba(255,50,150,0.6)" stroke="magenta" stroke-width="3"/>
+            <circle cx="75" cy="75" r="20" fill="rgba(255,150,200,0.8)" stroke="white" stroke-width="2"/>
+        </svg>
+
+        <!-- SLASH EFFECTS -->
+        <svg id="slashEffect" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 10 100 Q 50 50, 100 10 Q 150 50, 190 100 Q 150 150, 100 190 Q 50 150, 10 100"
+                  fill="none" stroke="red" stroke-width="8" opacity="0.8"/>
+            <line x1="20" y1="180" x2="180" y2="20" stroke="red" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
+        </svg>
+
+        <svg id="brandSlashEffect" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#ff00ff;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#8800ff;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#4400ff;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <path d="M 20 125 Q 60 60, 125 20 Q 190 60, 230 125 Q 190 190, 125 230 Q 60 190, 20 125"
+                  fill="none" stroke="url(#purpleGrad)" stroke-width="10" opacity="0.9"/>
+            <line x1="30" y1="220" x2="220" y2="30" stroke="#ff00ff" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+        </svg>
+
+        <svg id="volcanoSlashEffect" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="fireGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#ff4400;stop-opacity:1" />
+                    <stop offset="40%" style="stop-color:#ff8800;stop-opacity:1" />
+                    <stop offset="70%" style="stop-color:#ffcc00;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#ff4400;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <path d="M 30 150 Q 80 60, 150 30 Q 220 60, 270 150 Q 220 240, 150 270 Q 80 240, 30 150"
+                  fill="none" stroke="url(#fireGrad)" stroke-width="12" opacity="0.95"/>
+            <line x1="40" y1="260" x2="260" y2="40" stroke="#ff4400" stroke-width="18" stroke-linecap="round" opacity="1"/>
+        </svg>
+
+        <!-- HERO UNIT -->
+        <div class="unit-mobile">
+            <div id="heroNameTag" style="font-size:7px;">HERO</div>
+            <div class="bar-container-mobile">
+                <div class="hp-text-mobile"><span id="hpValHero">100</span>/<span id="hpMaxHero">100</span></div>
+                <div class="bar-mobile"><div id="heroBar" class="fill"></div></div>
+            </div>
+            <div id="heroWrapper">
+                <img id="weaponOverlay" src="" alt="weapon">
+                <img id="terraprisma" src="https://static.wikia.nocookie.net/terraria_gamepedia/images/b/b0/Terraprisma.png" alt="terraprisma">
+                <img id="kaidoWhip" src="https://static.wikia.nocookie.net/terraria_gamepedia/images/8/86/Kaleidoscope.png" alt="kaidoWhip" style="animation: rainbowPulse 1s infinite;">
+                <img id="hornetBee" src="https://terraria.wiki.gg/images/Hornet_%28minion%29.gif" alt="hornetBee">
+                <img id="terrarianSpear" src="https://thoriummod.wiki.gg/images/Terrarium_Spear.png" alt="terrarianSpear" style="display:none;">
+                <img id="devourPrideProjectile" src="https://terraria.wiki.gg/images/Twilight_Lance.png" alt="devourPrideProjectile" style="display:none; filter: blur(2px);">
+                <img id="mythrilOre" src="https://terraria.wiki.gg/images/Mythril_Ore.png" alt="mythrilOre" style="display:none;">
+                <img id="heroImg" class="battle-char" src="" alt="hero" style="transform: scaleX(1);">
+                <img id="petImg" src="" alt="pet" style="display:none; position:absolute; bottom:-5px; right:-30px; width:40px; height:40px; z-index:6;">
+            </div>
+        </div>
+
+        <!-- ENEMY UNIT -->
+        <div class="unit-mobile">
+            <div id="enemyName" style="font-size:7px;">MONSTER</div>
+            <img id="enemyImg" class="battle-char" src="">
+            <div class="bar-container-mobile">
+                <div class="hp-text-mobile"><span id="hpValEnemy">50</span>/<span id="hpMaxEnemy">50</span></div>
+                <div class="bar-mobile"><div id="enemyBar" class="fill"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOBILE GAME UI -->
+    <div class="mobile-game-ui">
+        <div id="timerContainer" style="font-size: 12px;">⏱️ <span id="timerDisplay">20</span>s</div>
+
+        <div id="inputZone">
+            <h2 id="question" style="font-size: 14px;">?</h2>
+            <input type="text" id="answer" placeholder="?" autocomplete="off" style="font-size: 16px; width: 140px; padding: 8px;">
+        </div>
+
+        <div id="attackBarContainer">
+            <div id="sweepingLine"></div>
+            <div class="zone" id="zone-red1"></div>
+            <div class="zone" id="zone-yellow1"></div>
+            <div class="zone" id="zone-green"></div>
+            <div class="zone" id="zone-yellow2"></div>
+            <div class="zone" id="zone-red2"></div>
+        </div>
+        <p id="attackPrompt" style="font-size: 11px;">TAP SPACE!</p>
+
+        <div class="mobile-controls">
+            <button class="menu-btn" onclick="check()">⚔️ ATTACK</button>
+            <button class="menu-btn" onclick="quitGame()" style="border-color:red; color:red; font-size: 10px;">🏳️ QUIT</button>
+        </div>
+    </div>
+
+    <audio id="bossVoice" src=""></audio>
+
+    <!-- CUTSCENE OVERLAY -->
+    <div id="cutsceneOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,1); z-index:9999; justify-content:center; align-items:center; overflow:hidden; flex-direction:column;">
+        <div id="letterboxTop" style="position:absolute; top:0; left:0; width:100%; height:60px; background:#000; z-index:10001; opacity:0; transition: opacity 1s;"></div>
+        <div id="letterboxBottom" style="position:absolute; bottom:0; left:0; width:100%; height:60px; background:#000; z-index:10001; opacity:0; transition: opacity 1s;"></div>
+        <div id="particleContainer" style="position:absolute; width:100%; height:100%; pointer-events:none; z-index:9998;"></div>
+        <img id="blackHole" src="https://terrariamods.wiki.gg/images/Black_Hole_%28Wrath_of_the_Gods%29.png" style="width:10px; height:10px; transition: all 3s ease-in; animation: circleSwing 2s linear infinite; filter: drop-shadow(0 0 20px red) drop-shadow(0 0 40px purple); opacity:0;">
+        <div id="bossTextContainer" style="display:none; position:absolute; z-index:10002; text-align:center; width:90%;">
+            <h1 id="bossText1" style="color:#ff0000; font-size:18px; text-shadow: 0 0 10px #ff0000; margin:8px 0; opacity:0; transform: scale(0.5); transition: all 0.8s;"></h1>
+            <h1 id="bossText2" style="color:#ff6600; font-size:20px; text-shadow: 0 0 10px #ff6600; margin:8px 0; opacity:0; transform: scale(0.5); transition: all 0.8s;"></h1>
+            <h1 id="bossText3" style="color:#ffff00; font-size:24px; text-shadow: 0 0 15px #ffff00; margin:8px 0; opacity:0; transform: scale(0.5); transition: all 0.8s; animation: pulse 1s infinite;"></h1>
+        </div>
+        <div id="screenFlash" style="position:absolute; top:0; left:0; width:100%; height:100%; background:#fff; opacity:0; pointer-events:none; z-index:10003;"></div>
+    </div>
+
+    <!-- DODGE ARENA - Mobile Optimized -->
+    <div id="dodgeArena" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:90vw; max-width:400px; height:50vh; max-height:300px; border:4px solid red; background:rgba(0,0,0,0.85); overflow:hidden; z-index:10000; box-shadow: 0 0 30px red;">
+        <div id="dodgeTimer" style="position:absolute; top:8px; right:8px; font-size:11px; color:white;">⏱️ <span id="dodgeTimeDisplay">40</span>s</div>
+        <div style="position:absolute; top:8px; left:8px; font-size:9px; color:red; animation: blink 1s infinite;">👆 TAP TO MOVE</div>
+        <img id="dodgePlayer" src="" style="position:absolute; width:20px; height:20px; left:45%; top:40%; object-fit:contain;">
+
+        <div id="dodgeHPDisplay" style="position:absolute; bottom:8px; left:50%; transform:translateX(-50%); text-align:center;">
+            <div style="font-size:9px; color:white; margin-bottom:3px;">HP</div>
+            <div style="width:80vw; max-width:180px; height:18px; border:3px solid white; background:#222; position:relative;">
+                <div id="dodgeHPBar" style="height:100%; width:100%; background:linear-gradient(to right, #ff0000, #00ff00); transition: width 0.3s;"></div>
+                <div id="dodgeHPText" style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); font-size:9px; color:white; text-shadow:1px 1px black; font-weight:bold;">100/100</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="../shared/js/game.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    updateUI();
+});
+</script>
+</body>
+</html>

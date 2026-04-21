@@ -1,0 +1,1430 @@
+/* --- CORE STYLES --- */
+* {
+    font-family: 'Andy', 'Press Start 2P', cursive;
+    font-weight: bold;
+    image-rendering: pixelated;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+body {
+    background: #222 url('https://terraria.wiki.gg/images/Forest_background_9.png') center / 100% 100% no-repeat fixed;
+    color: #ffcccc;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+/* --- UI ELEMENTS --- */
+input[type="text"],
+input[type="password"] {
+    font-size: 14px;
+    padding: 10px;
+    margin: 10px;
+    background: #000;
+    color: #ffffff;
+    border: 3px solid #fff;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    outline: none;
+}
+
+input#answer {
+    font-size: 16px;
+    width: 140px;
+    padding: 5px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border: 3px solid gold;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+input#answer:disabled {
+    opacity: 0.5;
+    border-color: gray;
+}
+
+button {
+    cursor: pointer;
+}
+
+#soundMasterBtn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 10001;
+    background: #000080;
+    border: 3px solid #fff;
+    color: #fff;
+    padding: 10px;
+    font-size: 8px;
+}
+
+section {
+    display: none;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+section.active {
+    display: block;
+}
+
+#menu {
+    background: url('https://terraria.wiki.gg/images/Forest_background_9.png') center / cover no-repeat fixed;
+}
+
+#difficulty {
+    background: url('https://forums.terraria.org/index.php?attachments/uw-bg-gif.269592/') center / cover no-repeat fixed;
+}
+
+#landing {
+    background: url('https://forums.terraria.org/index.php?attachments/uw-bg-gif.269592/') center / cover no-repeat fixed;
+}
+
+#game {
+    background: url('https://terraria.wiki.gg/images/Glowing_Mushroom_background_2.png') center / cover no-repeat fixed;
+}
+
+#quest {
+    background: url('https://i.pinimg.com/originals/3e/71/50/3e715069c332dc0c61d95cf645b89f77.gif') center / cover no-repeat fixed;
+}
+
+/* --- DIALOGUE & MENUS --- */
+#dialogueBox {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60%;
+    height: 100px;
+    background: #000080;
+    border: 4px solid #fff;
+    padding: 15px;
+    font-size: 10px;
+    color: #fff;
+    text-align: left;
+    z-index: 1000;
+    display: none;
+    line-height: 1.5;
+}
+
+.menu-btn,
+.hero,
+.age,
+.upgrade-btn {
+    border: 3px solid #ff6666;
+    padding: 12px;
+    margin: 8px;
+    display: inline-block;
+    background: #330000;
+    font-size: 10px;
+    color: #ffcccc;
+    text-decoration: none;
+    vertical-align: top;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.menu-btn:hover,
+.hero:hover:not(.locked),
+.upgrade-btn:hover {
+    transform: scale(1.05);
+    background: #660000;
+    border-color: #ff9999;
+}
+
+/* ADMIN BUTTON STYLE */
+.admin-btn {
+    border: 3px solid #ff00ff;
+    color: #ff00ff;
+    background: #4b0082;
+}
+
+.admin-btn:hover {
+    background: #800080;
+    color: white;
+    border-color: white;
+}
+
+.shop-icon {
+    display: block;
+    margin: 0 auto 8px auto;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.upgrade-container {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid gold;
+    padding: 10px;
+    margin: 10px auto;
+    max-width: 450px;
+}
+
+.stat-val {
+    color: #00ff00;
+}
+
+.selected {
+    border-color: gold !important;
+    box-shadow: 0 0 10px gold;
+    color: gold !important;
+}
+
+.locked {
+    opacity: 0.5;
+    filter: grayscale(1);
+    border-style: dashed;
+}
+
+.equipped {
+    border-color: #00ffff !important;
+    box-shadow: 0 0 15px #00ffff;
+    color: #00ffff !important;
+}
+
+/* REBIRTH BUTTON STYLE */
+.rebirth-btn {
+    grid-column: span 2;
+    border: 3px solid #ff00ff !important;
+    color: #ff00ff !important;
+    background: #220022;
+    box-shadow: 0 0 10px #ff00ff;
+    animation: pulseRebirth 2s infinite;
+}
+
+@keyframes pulseRebirth {
+    0% {
+        box-shadow: 0 0 5px #ff00ff;
+    }
+    50% {
+        box-shadow: 0 0 20px #ff00ff;
+    }
+    100% {
+        box-shadow: 0 0 5px #ff00ff;
+    }
+}
+
+/* SKIP BOSS BUTTON */
+#skipBossBtn {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff8800;
+    color: black;
+    border: 3px solid white;
+    padding: 10px 20px;
+    z-index: 9999;
+    font-weight: bold;
+    box-shadow: 0 0 15px orange;
+}
+
+#skipBossBtn:hover {
+    background: #ffaa44;
+    transform: translateX(-50%) scale(1.1);
+}
+
+/* --- BATTLE STAGE --- */
+.bar-container {
+    width: 220px;
+    margin: 5px auto;
+    position: relative;
+}
+
+.bar {
+    width: 100%;
+    height: 12px;
+    border: 3px solid white;
+    background: #222;
+}
+
+.fill {
+    height: 100%;
+    width: 100%;
+    transition: width 0.3s;
+}
+
+#enemyBar {
+    background: #32CD32;
+}
+
+#heroBar {
+    background: #00ff00;
+}
+
+.hp-text {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+    font-size: 8px;
+    text-shadow: 1px 1px #000;
+    font-family: 'Pixelify Sans', cursive !important;
+}
+
+#question {
+    font-family: 'Elsone', cursive !important;
+}
+
+.battle-stage {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin-top: 40px;
+    position: relative;
+    height: 320px;
+    border-bottom: 4px solid rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 20%);
+}
+
+#heroWrapper {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+#heroImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#enemyImg {
+    transform: scaleX(1);
+    width: 220px;
+    height: 220px;
+    object-fit: contain;
+    margin-bottom: -10px;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.battle-char {
+    position: relative;
+    z-index: 5;
+}
+
+/* SCREEN SHAKE */
+.shake {
+    animation: shakeAnim 0.5s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+@keyframes shakeAnim {
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+/* --- ANIMATIONS --- */
+#weaponOverlay {
+    position: absolute;
+    bottom: 10px;
+    right: -20px;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    z-index: 10;
+    display: none;
+    transform: rotate(0deg);
+    pointer-events: none;
+    transform-origin: bottom left;
+}
+
+@keyframes circleSwing {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.swinging {
+    animation: circleSwing 0.4s linear !important;
+}
+
+/* THROW ANIMATION (For Potions) */
+@keyframes throwArc {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    20% {
+        transform: translate(50px, -50px) rotate(90deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(150px, -80px) rotate(180deg);
+        opacity: 1;
+    }
+    80% {
+        transform: translate(250px, -20px) rotate(270deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(300px, 50px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.throwing {
+    animation: throwArc 0.6s linear forwards !important;
+}
+
+/* TERRAPRISMA */
+#terraprisma {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    z-index: 1;
+    display: none;
+    transform: rotate(165deg);
+    animation: floatPrisma 3s linear infinite;
+    transform-origin: center;
+}
+
+@keyframes floatPrisma {
+    0% {
+        transform: translateY(0) rotate(165deg);
+        filter: drop-shadow(0 0 5px red) hue-rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(165deg);
+        filter: drop-shadow(0 0 10px cyan) hue-rotate(180deg);
+    }
+    100% {
+        transform: translateY(0) rotate(165deg);
+        filter: drop-shadow(0 0 5px red) hue-rotate(360deg);
+    }
+}
+
+@keyframes flyAttack {
+    0% {
+        transform: translate(0, 0) rotate(165deg);
+        filter: drop-shadow(0 0 5px red) hue-rotate(0deg);
+    }
+    15% {
+        transform: translate(-40px, 10px) rotate(45deg);
+        filter: drop-shadow(0 0 15px gold) hue-rotate(45deg);
+    }
+    50% {
+        transform: translate(1200px, -50px) rotate(45deg) scale(1.3);
+        filter: drop-shadow(0 0 20px cyan) hue-rotate(180deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(165deg);
+        filter: drop-shadow(0 0 5px red) hue-rotate(360deg);
+    }
+}
+
+.prisma-attack {
+    animation: flyAttack 0.7s ease-in-out !important;
+}
+
+/* TERRARIAN SPEAR */
+#terrarianSpear {
+    position: absolute;
+    top: -20px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    z-index: 5;
+    display: none;
+    transform: rotate(90deg);
+    transform-origin: center;
+}
+
+@keyframes spearAttackTop {
+    0% {
+        transform: translate(0, 0) rotate(90deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 5px gold);
+    }
+    100% {
+        transform: translate(1200px, -150px) rotate(90deg);
+        opacity: 0;
+        filter: drop-shadow(0 0 20px magenta);
+    }
+}
+
+@keyframes spearAttackBottom {
+    0% {
+        transform: translate(0, 0) rotate(90deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 5px gold);
+    }
+    100% {
+        transform: translate(1200px, 150px) rotate(90deg);
+        opacity: 0;
+        filter: drop-shadow(0 0 20px magenta);
+    }
+}
+
+.spear-attack-top {
+    animation: spearAttackTop 0.6s ease-out forwards !important;
+}
+
+.spear-attack-bottom {
+    animation: spearAttackBottom 0.6s ease-out forwards !important;
+}
+
+/* BOSS GLOW EFFECT */
+.boss-glow {
+    filter: drop-shadow(0 0 20px cyan) drop-shadow(0 0 40px blue);
+    opacity: 0;
+    animation: fadeInGlow 2s forwards;
+}
+
+@keyframes fadeInGlow {
+    to {
+        opacity: 1;
+    }
+}
+
+/* STRESS BALL */
+.stress-ball {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+    animation: circleSwing 1s linear infinite;
+}
+
+/* HORNET BEE */
+#hornetBee {
+    position: absolute;
+    bottom: 10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    z-index: 15;
+    display: none;
+    opacity: 0;
+}
+
+@keyframes beeAttack {
+    0% {
+        transform: translate(0, 0) scale(0.5);
+        opacity: 0;
+        filter: blur(0px);
+    }
+    20% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+        filter: blur(0px);
+    }
+    30% {
+        transform: translate(100px, 0) scale(1.1);
+        opacity: 1;
+        filter: blur(0px);
+    }
+    70% {
+        transform: translate(600px, 0) scale(1.2);
+        opacity: 1;
+        filter: blur(0px);
+    }
+    90% {
+        transform: translate(700px, 0) scale(1);
+        opacity: 0.5;
+        filter: blur(3px);
+    }
+    100% {
+        transform: translate(750px, 0) scale(0.5);
+        opacity: 0;
+        filter: blur(5px);
+    }
+}
+
+.bee-attacking {
+    animation: beeAttack 1s ease-out !important;
+}
+
+/* KAIDO WHIP */
+#kaidoWhip {
+    position: absolute;
+    bottom: 10px;
+    right: -10px;
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    z-index: 15;
+    display: none;
+    transform-origin: center;
+    filter: drop-shadow(0 0 5px cyan);
+}
+
+@keyframes rainbowPulse {
+    0% {
+        filter: hue-rotate(0deg) drop-shadow(0 0 5px red);
+    }
+    50% {
+        filter: hue-rotate(180deg) drop-shadow(0 0 8px cyan);
+    }
+    100% {
+        filter: hue-rotate(360deg) drop-shadow(0 0 5px red);
+    }
+}
+
+@keyframes whipBoomerang {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        filter: hue-rotate(0deg) drop-shadow(0 0 5px red);
+    }
+    50% {
+        transform: translate(300px, -40px) rotate(720deg) scale(1.8);
+        filter: hue-rotate(180deg) drop-shadow(0 0 15px cyan);
+    }
+    100% {
+        transform: translate(0, 0) rotate(1440deg) scale(1);
+        filter: hue-rotate(360deg) drop-shadow(0 0 5px red);
+    }
+}
+
+.whip-lash {
+    animation: whipBoomerang 1.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* DEVOUR PRIDE - Rainbow Blurry Projectile */
+#devourPrideProjectile {
+    position: absolute;
+    bottom: 10px;
+    right: -10px;
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    z-index: 15;
+    display: none;
+    filter: blur(2px) drop-shadow(0 0 10px gold);
+    animation: rainbowGlow 0.5s ease-in-out infinite;
+}
+
+@keyframes rainbowGlow {
+    0% {
+        filter: blur(2px) drop-shadow(0 0 15px #ff0000) hue-rotate(0deg);
+    }
+    25% {
+        filter: blur(2px) drop-shadow(0 0 15px #ff8800) hue-rotate(90deg);
+    }
+    50% {
+        filter: blur(2px) drop-shadow(0 0 15px #ffff00) hue-rotate(180deg);
+    }
+    75% {
+        filter: blur(2px) drop-shadow(0 0 15px #00ff00) hue-rotate(270deg);
+    }
+    100% {
+        filter: blur(2px) drop-shadow(0 0 15px #ff0000) hue-rotate(360deg);
+    }
+}
+
+@keyframes devourPrideShoot {
+    0% {
+        transform: translate(0, 0) scale(0.8);
+        opacity: 1;
+        filter: blur(2px) drop-shadow(0 0 10px gold);
+    }
+    50% {
+        transform: translate(400px, 0) scale(1.2);
+        opacity: 1;
+        filter: blur(4px) drop-shadow(0 0 25px rainbow);
+    }
+    100% {
+        transform: translate(800px, 0) scale(0.5);
+        opacity: 0;
+        filter: blur(6px) drop-shadow(0 0 30px rainbow);
+    }
+}
+
+.devour-pride-shooting {
+    animation: devourPrideShoot 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+}
+
+/* LOOT DROP ANIMATION */
+#lootDrop {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index: 20;
+    display: none;
+    object-fit: contain;
+}
+
+/* MYTHRIL ORE PROJECTILE */
+#mythrilOre {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    z-index: 15;
+    display: none;
+    object-fit: contain;
+}
+
+@keyframes mythrilShoot {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-600px, 200px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.mythril-shooting {
+    animation: mythrilShoot 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+}
+
+@keyframes dropFromMouth {
+    0% {
+        top: 30%;
+        left: 70%;
+        transform: scale(0.5) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        top: 30%;
+        left: 70%;
+        transform: scale(1.2) rotate(10deg);
+        opacity: 1;
+    }
+    100% {
+        top: 60%;
+        left: 60%;
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+.dropping {
+    animation: dropFromMouth 2s ease-out forwards;
+    display: block !important;
+}
+
+#timerContainer {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #ff3333;
+    text-shadow: 2px 2px #000;
+    font-family: 'Press Start 2P', cursive !important;
+}
+
+#timerDisplay {
+    display: inline-block;
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #ff3333;
+    font-family: 'Press Start 2P', cursive !important;
+}
+
+#inputZone {
+    display: block;
+}
+
+#attackBarContainer {
+    display: none;
+    position: relative;
+    width: 380px;
+    height: 90px;
+    margin: 15px auto;
+    background: #000;
+    border: 6px solid #fff;
+    overflow: hidden;
+    border-radius: 45px;
+    box-shadow: 0 0 25px #0ff;
+}
+
+#sweepingLine {
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    background: #fff;
+    left: 0;
+    box-shadow: 0 0 12px #fff;
+    z-index: 2;
+}
+
+#attackPrompt {
+    display: none;
+    font-size: 14px;
+    color: #0f0;
+    margin: 10px;
+    text-shadow: 1px 1px #000;
+    animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.zone {
+    position: absolute;
+    height: 100%;
+    opacity: 0.75;
+}
+
+#zone-red1 {
+    left: 0;
+    width: 18%;
+    background: linear-gradient(to right, #800000, #ff0000);
+}
+
+#zone-yellow1 {
+    left: 18%;
+    width: 17%;
+    background: linear-gradient(to right, #ff0000, #ffff00);
+}
+
+#zone-green {
+    left: 35%;
+    width: 30%;
+    background: #00ff00;
+}
+
+#zone-yellow2 {
+    left: 65%;
+    width: 17%;
+    background: linear-gradient(to right, #ffff00, #ff0000);
+}
+
+#zone-red2 {
+    left: 82%;
+    width: 18%;
+    background: linear-gradient(to right, #ff0000, #800000);
+}
+
+#damageText {
+    position: absolute;
+    top: 40%;
+    left: 60%;
+    font-size: 30px;
+    color: yellow;
+    text-shadow: 2px 2px red;
+    opacity: 0;
+    z-index: 50;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+}
+
+/* AI FEEDBACK BOX */
+#aiFeedback {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 80, 0.95);
+    border: 4px solid #00ffff;
+    padding: 20px;
+    max-width: 400px;
+    z-index: 10000;
+    text-align: center;
+    box-shadow: 0 0 30px #00ffff;
+}
+
+#aiFeedback h3 {
+    color: #ff6600;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#aiFeedback p {
+    color: #ffcccc;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+#aiFeedback .correct-answer {
+    color: #32CD32;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* RUNNING ANIMATION */
+@keyframes runToEnemy {
+    0% {
+        transform: translateX(0) scaleX(-1);
+    }
+    40% {
+        transform: translateX(600px) scaleX(-1);
+    }
+    50% {
+        transform: translateX(600px) scaleX(-1);
+    }
+    100% {
+        transform: translateX(0) scaleX(-1);
+    }
+}
+
+.running {
+    animation: runToEnemy 1.2s ease-in-out !important;
+}
+
+/* BRAND OF INFERNO RUNNING ANIMATION */
+@keyframes runToEnemyBrand {
+    0% {
+        transform: translateX(0) scaleX(-1);
+        filter: drop-shadow(0 0 10px #ff00ff) drop-shadow(0 0 20px #8800ff);
+    }
+    20% {
+        transform: translateX(300px) scaleX(-1);
+        filter: drop-shadow(0 0 15px #ff00ff) drop-shadow(0 0 30px #8800ff) drop-shadow(0 0 40px #4400ff);
+    }
+    40% {
+        transform: translateX(600px) scaleX(-1);
+        filter: drop-shadow(0 0 20px #ff00ff) drop-shadow(0 0 40px #8800ff) drop-shadow(0 0 60px #4400ff);
+    }
+    50% {
+        transform: translateX(600px) scaleX(-1);
+        filter: drop-shadow(0 0 25px #ff00ff) drop-shadow(0 0 50px #8800ff) drop-shadow(0 0 80px #4400ff);
+    }
+    60% {
+        transform: translateX(600px) scaleX(-1);
+        filter: drop-shadow(0 0 20px #ff00ff) drop-shadow(0 0 40px #8800ff) drop-shadow(0 0 60px #4400ff);
+    }
+    80% {
+        transform: translateX(300px) scaleX(-1);
+        filter: drop-shadow(0 0 15px #ff00ff) drop-shadow(0 0 30px #8800ff) drop-shadow(0 0 40px #4400ff);
+    }
+    100% {
+        transform: translateX(0) scaleX(-1);
+        filter: drop-shadow(0 0 10px #ff00ff) drop-shadow(0 0 20px #8800ff);
+    }
+}
+
+.running-brand {
+    animation: runToEnemyBrand 1.2s ease-in-out !important;
+}
+
+/* VOLCANO FIRE RUNNING ANIMATION */
+@keyframes runToEnemyVolcano {
+    0% {
+        transform: translateX(0) scaleX(-1);
+        filter: drop-shadow(0 0 10px #ff4400) drop-shadow(0 0 20px #ff8800);
+    }
+    20% {
+        transform: translateX(300px) scaleX(-1);
+        filter: drop-shadow(0 0 15px #ff4400) drop-shadow(0 0 30px #ff8800) drop-shadow(0 0 40px #ffcc00);
+    }
+    40% {
+        transform: translateX(600px) scaleX(-1);
+        filter: drop-shadow(0 0 20px #ff4400) drop-shadow(0 0 40px #ff8800) drop-shadow(0 0 60px #ffcc00);
+    }
+    50% {
+        transform: translateX(600px) scaleX(-1);
+        filter: drop-shadow(0 0 25px #ff4400) drop-shadow(0 0 50px #ff8800) drop-shadow(0 0 80px #ffcc00);
+    }
+    60% {
+        transform: translateX(600px) scaleX(-1);
+        filter: drop-shadow(0 0 20px #ff4400) drop-shadow(0 0 40px #ff8800) drop-shadow(0 0 60px #ffcc00);
+    }
+    80% {
+        transform: translateX(300px) scaleX(-1);
+        filter: drop-shadow(0 0 15px #ff4400) drop-shadow(0 0 30px #ff8800) drop-shadow(0 0 40px #ffcc00);
+    }
+    100% {
+        transform: translateX(0) scaleX(-1);
+        filter: drop-shadow(0 0 10px #ff4400) drop-shadow(0 0 20px #ff8800);
+    }
+}
+
+.running-volcano {
+    animation: runToEnemyVolcano 1.2s ease-in-out !important;
+}
+
+/* Make weapon overlay move with hero during run */
+#heroWrapper.running-wrapper #weaponOverlay {
+    animation: runWeapon 1.2s ease-in-out !important;
+}
+
+#heroWrapper.running-wrapper #petImg {
+    animation: runPet 1.2s ease-in-out !important;
+}
+
+@keyframes runWeapon {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+    40% {
+        transform: translateX(600px) rotate(360deg);
+    }
+    50% {
+        transform: translateX(600px) rotate(720deg);
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+@keyframes runPet {
+    0% {
+        transform: translateX(0);
+    }
+    40% {
+        transform: translateX(600px);
+    }
+    50% {
+        transform: translateX(600px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* POTION EXPLOSIONS */
+#potionExplosion {
+    position: absolute;
+    display: none;
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes explode {
+    0% {
+        transform: translate(-50%, -50%) scale(0.1);
+        opacity: 1;
+        filter: drop-shadow(0 0 10px cyan) brightness(2);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 1;
+        filter: drop-shadow(0 0 30px cyan) drop-shadow(0 0 50px blue) brightness(1.5);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
+        filter: drop-shadow(0 0 10px cyan) brightness(1);
+    }
+}
+
+.exploding {
+    display: block !important;
+    animation: explode 0.6s ease-out !important;
+}
+
+#potionOneExplosion {
+    position: absolute;
+    display: none;
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes explodeParty {
+    0% {
+        transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 10px pink) brightness(2) hue-rotate(0deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5) rotate(180deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 30px pink) drop-shadow(0 0 50px magenta) brightness(1.5) hue-rotate(180deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2.5) rotate(360deg);
+        opacity: 0;
+        filter: drop-shadow(0 0 10px pink) brightness(1) hue-rotate(360deg);
+    }
+}
+
+.exploding-party {
+    display: block !important;
+    animation: explodeParty 0.6s ease-out !important;
+}
+
+/* SLASH EFFECT */
+#slashEffect {
+    position: absolute;
+    display: none;
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes slashAnim {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(-45deg) scale(0.5);
+        filter: drop-shadow(0 0 10px red);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg) scale(1.5);
+        filter: drop-shadow(0 0 30px red) drop-shadow(0 0 50px orange);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(45deg) scale(2);
+        filter: drop-shadow(0 0 10px red);
+    }
+}
+
+.slashing {
+    display: block !important;
+    animation: slashAnim 0.4s ease-out !important;
+}
+
+/* BRAND OF INFERNO PURPLE MAGICAL SLASH */
+#brandSlashEffect {
+    position: absolute;
+    display: none;
+    width: 250px;
+    height: 250px;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes brandSlashAnim {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(-60deg) scale(0.3);
+        filter: drop-shadow(0 0 15px #ff00ff) drop-shadow(0 0 30px #8800ff);
+    }
+    30% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(-20deg) scale(1.2);
+        filter: drop-shadow(0 0 25px #ff00ff) drop-shadow(0 0 50px #8800ff) drop-shadow(0 0 80px #4400ff);
+    }
+    60% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(20deg) scale(1.8);
+        filter: drop-shadow(0 0 35px #ff00ff) drop-shadow(0 0 60px #8800ff) drop-shadow(0 0 100px #4400ff);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(60deg) scale(2.5);
+        filter: drop-shadow(0 0 15px #ff00ff) drop-shadow(0 0 30px #8800ff);
+    }
+}
+
+.brand-slashing {
+    display: block !important;
+    animation: brandSlashAnim 0.5s ease-out !important;
+}
+
+/* VOLCANO FIRE SLASH */
+#volcanoSlashEffect {
+    position: absolute;
+    display: none;
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes volcanoSlashAnim {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(-60deg) scale(0.3);
+        filter: drop-shadow(0 0 20px #ff4400) drop-shadow(0 0 40px #ff8800);
+    }
+    30% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(-20deg) scale(1.2);
+        filter: drop-shadow(0 0 30px #ff4400) drop-shadow(0 0 60px #ff8800) drop-shadow(0 0 80px #ffcc00);
+    }
+    60% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(20deg) scale(1.8);
+        filter: drop-shadow(0 0 40px #ff4400) drop-shadow(0 0 80px #ff8800) drop-shadow(0 0 100px #ffcc00);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(60deg) scale(2.5);
+        filter: drop-shadow(0 0 20px #ff4400) drop-shadow(0 0 40px #ff8800);
+    }
+}
+
+.volcano-slashing {
+    display: block !important;
+    animation: volcanoSlashAnim 0.5s ease-out !important;
+}
+
+/* ENHANCED BOSS CUTSCENE ANIMATIONS */
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% {
+        transform: scale(1.05);
+        filter: brightness(1.3);
+    }
+}
+
+@keyframes screenShake {
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+    10% {
+        transform: translate(-10px, 5px);
+    }
+    20% {
+        transform: translate(10px, -5px);
+    }
+    30% {
+        transform: translate(-8px, -8px);
+    }
+    40% {
+        transform: translate(8px, 8px);
+    }
+    50% {
+        transform: translate(-10px, 5px);
+    }
+    60% {
+        transform: translate(10px, -5px);
+    }
+    70% {
+        transform: translate(-8px, -8px);
+    }
+    80% {
+        transform: translate(8px, 8px);
+    }
+    90% {
+        transform: translate(-5px, 5px);
+    }
+}
+
+@keyframes particleFall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes vortexSpin {
+    0% {
+        transform: rotate(0deg) scale(1);
+        filter: drop-shadow(0 0 20px red) drop-shadow(0 0 40px purple) hue-rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+        filter: drop-shadow(0 0 40px red) drop-shadow(0 0 80px purple) hue-rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+        filter: drop-shadow(0 0 20px red) drop-shadow(0 0 40px purple) hue-rotate(360deg);
+    }
+}
+
+@keyframes textGlitch {
+    0% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        transform: translate(2px, 2px);
+    }
+    80% {
+        transform: translate(2px, -2px);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ff0000;
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+/* --- WEAPON TEST SECTION --- */
+#weaponTest {
+    background: url('https://static.wikia.nocookie.net/terraria_gamepedia/images/3/38/Glowing_Mushroom_background_3.png') center / cover no-repeat fixed;
+}
+
+#weaponTestArea {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin-top: 40px;
+    position: relative;
+    height: 320px;
+    border-bottom: 4px solid rgba(0, 0, 0, 0.5);
+}
+
+#testHeroWrapper {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+#testHeroImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#testWeaponOverlay {
+    position: absolute;
+    bottom: 10px;
+    right: -20px;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    z-index: 10;
+    transform-origin: bottom left;
+}
+
+#testDummy {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    transition: transform 0.1s;
+}
+
+#testDummy.hit {
+    animation: dummyHit 0.2s ease-out;
+}
+
+@keyframes dummyHit {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9) rotate(5deg);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#hitBtn {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 40px;
+    font-size: 20px;
+    background: #ff0000;
+    color: white;
+    border: 4px solid white;
+    cursor: pointer;
+    text-shadow: 2px 2px #000;
+    box-shadow: 0 0 20px red;
+}
+
+#hitBtn:hover {
+    background: #ff4444;
+    transform: scale(1.1);
+}
+
+#damagePopups {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.damageNumber {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: yellow;
+    text-shadow: 2px 2px red;
+    animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+}
+
+#testStats {
+    background: rgba(0, 0, 128, 0.8);
+    border: 4px solid gold;
+    padding: 15px;
+    max-width: 400px;
+    margin: 20px auto;
+    color: white;
+    font-size: 12px;
+}

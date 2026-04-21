@@ -1,0 +1,555 @@
+/* --- MOBILE LANDSCAPE OPTIMIZED STYLES --- */
+/* Target: iPhone landscape 414×736pt, but works on all mobile devices */
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    font-size: 10px;
+}
+
+body {
+    background-size: cover !important;
+    background-attachment: fixed !important;
+}
+
+/* --- RESPONSIVE FONT SCALING --- */
+h1 { font-size: clamp(12px, 3.5vw, 18px) !important; }
+h2 { font-size: clamp(11px, 3vw, 16px) !important; }
+h3 { font-size: clamp(9px, 2.5vw, 12px) !important; }
+p, div { font-size: clamp(8px, 2.2vw, 10px) !important; }
+
+/* --- BUTTONS - TOUCH OPTIMIZED --- */
+.menu-btn {
+    min-height: 36px;
+    min-width: 44px;
+    padding: 8px 12px !important;
+    font-size: clamp(8px, 2.5vw, 11px) !important;
+    margin: 4px !important;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+}
+
+/* Mobile-specific grid for menu */
+.mobile-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    max-width: 100%;
+    margin: 10px auto;
+    padding: 0 8px;
+}
+
+.mobile-upgrade-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.upgrade-btn {
+    min-height: 32px;
+    font-size: clamp(7px, 2vw, 9px) !important;
+    padding: 6px 8px !important;
+}
+
+/* --- SHOP ITEMS - SMALLER ICONS --- */
+.shop-icon {
+    width: 28px !important;
+    height: 28px !important;
+    margin-bottom: 4px !important;
+}
+
+.shop-item {
+    padding: 6px 4px !important;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- INPUTS --- */
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+    font-size: clamp(12px, 3.5vw, 16px) !important;
+    padding: 8px 10px !important;
+    width: 160px !important;
+    max-width: 90vw;
+    margin: 6px auto !important;
+}
+
+input#answer {
+    font-size: clamp(14px, 4vw, 18px) !important;
+    width: 120px !important;
+    height: 38px !important;
+    padding: 4px !important;
+}
+
+/* --- SOUND BUTTON --- */
+#soundMasterBtn {
+    top: 8px !important;
+    right: 8px !important;
+    padding: 6px 8px !important;
+    font-size: 7px !important;
+    z-index: 10002;
+}
+
+/* --- BATTLE STAGE - COMPACT MOBILE --- */
+.battle-stage-mobile {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin-top: 15px;
+    position: relative;
+    height: 38vh;
+    min-height: 180px;
+    max-height: 280px;
+    border-bottom: 3px solid rgba(0,0,0,0.5);
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 25%);
+    padding: 0 10px;
+}
+
+.unit-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#heroWrapper {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+#heroImg {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#enemyImg {
+    width: 90px !important;
+    height: 90px !important;
+    object-fit: contain;
+    margin-bottom: -5px;
+}
+
+/* Smaller bars for mobile */
+.bar-container-mobile {
+    width: 100px !important;
+    margin: 3px auto;
+}
+
+.bar-mobile {
+    width: 100% !important;
+    height: 8px !important;
+    border-width: 2px !important;
+}
+
+.fill {
+    height: 100% !important;
+}
+
+.hp-text-mobile {
+    font-size: 6px !important;
+    top: 40% !important;
+}
+
+#heroNameTag, #enemyName {
+    font-size: 6px !important;
+    margin-bottom: 4px;
+}
+
+/* --- WEAPON OVERLAYS - SCALED DOWN --- */
+#weaponOverlay {
+    width: 30px !important;
+    height: 30px !important;
+    bottom: 6px !important;
+    right: -12px !important;
+}
+
+#terraprisma {
+    width: 40px !important;
+    height: 40px !important;
+    top: -6px !important;
+    left: -6px !important;
+}
+
+#kaidoWhip {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+#hornetBee {
+    width: 25px !important;
+    height: 25px !important;
+    bottom: 6px !important;
+    right: -6px !important;
+}
+
+#terrarianSpear {
+    width: 30px !important;
+    height: 30px !important;
+    top: -12px !important;
+    left: 18px !important;
+}
+
+#devourPrideProjectile {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+#petImg {
+    width: 30px !important;
+    height: 30px !important;
+    bottom: -3px !important;
+    right: -18px !important;
+}
+
+/* --- TIMER --- */
+#timerContainer {
+    font-size: clamp(10px, 3vw, 12px) !important;
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+}
+
+#timerDisplay {
+    padding: 3px 6px !important;
+    font-size: clamp(9px, 2.5vw, 11px) !important;
+}
+
+/* --- QUESTION INPUT --- */
+#inputZone {
+    text-align: center;
+    margin: 8px 0;
+}
+
+#question {
+    font-size: clamp(12px, 4vw, 16px) !important;
+    margin: 8px 0 !important;
+}
+
+/* --- ATTACK BAR --- */
+#attackBarContainer {
+    width: 100vw !important;
+    max-width: 300px !important;
+    height: 70px !important;
+    margin: 8px auto !important;
+    border-width: 4px !important;
+    border-radius: 35px !important;
+}
+
+#sweepingLine {
+    width: 8px !important;
+}
+
+.zone {
+    opacity: 0.8;
+}
+
+#zone-red1 { left: 0; width: 18%; }
+#zone-yellow1 { left: 18%; width: 17%; }
+#zone-green { left: 35%; width: 30%; }
+#zone-yellow2 { left: 65%; width: 17%; }
+#zone-red2 { left: 82%; width: 18%; }
+
+#attackPrompt {
+    font-size: 11px !important;
+    margin: 6px !important;
+}
+
+/* --- DAMAGE TEXT --- */
+#damageText {
+    font-size: 18px !important;
+    top: 35% !important;
+    left: 55% !important;
+}
+
+/* --- MOBILE CONTROLS --- */
+.mobile-controls {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.mobile-controls .menu-btn {
+    flex: 1;
+    max-width: 140px;
+    min-width: 100px;
+}
+
+/* --- AI FEEDBACK --- */
+#aiFeedback {
+    max-width: 90% !important;
+    padding: 12px !important;
+    top: 45% !important;
+}
+
+#aiFeedback h3 {
+    font-size: 12px !important;
+    margin-bottom: 6px !important;
+}
+
+#aiFeedback p {
+    font-size: 9px !important;
+    line-height: 1.4;
+}
+
+#aiFeedback .correct-answer {
+    font-size: 13px !important;
+}
+
+/* --- PRACTICE MODE --- */
+#practiceGame #practiceTimer {
+    font-size: 11px !important;
+    margin: 6px !important;
+}
+
+#practiceQuestion {
+    font-size: clamp(11px, 3.5vw, 14px) !important;
+    margin: 10px !important;
+}
+
+#practiceAnswer {
+    width: 140px !important;
+    font-size: 14px !important;
+    padding: 6px !important;
+}
+
+#practiceAIFeedback {
+    max-width: 90% !important;
+    padding: 10px !important;
+}
+
+#practiceAIFeedback h3 {
+    font-size: 11px !important;
+}
+
+#practiceAIFeedback p {
+    font-size: 9px !important;
+}
+
+/* --- CUTSCENE ADJUSTMENTS --- */
+#cutsceneOverlay {
+    font-size: 10px;
+}
+
+#bossTextContainer {
+    width: 90% !important;
+    max-width: none !important;
+}
+
+#bossText1 {
+    font-size: clamp(14px, 4.5vw, 18px) !important;
+}
+
+#bossText2 {
+    font-size: clamp(16px, 5vw, 20px) !important;
+}
+
+#bossText3 {
+    font-size: clamp(18px, 6vw, 24px) !important;
+}
+
+#letterboxTop, #letterboxBottom {
+    height: 50px !important;
+}
+
+/* --- DODGE ARENA --- */
+#dodgeArena {
+    width: 90vw !important;
+    max-width: 400px !important;
+    height: 45vh !important;
+    max-height: 280px !important;
+}
+
+#dodgePlayer {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.stress-ball {
+    width: 12px !important;
+    height: 12px !important;
+}
+
+#dodgeHPBar {
+    width: 80vw !important;
+    max-width: 180px !important;
+}
+
+#dodgeHPText {
+    font-size: 8px !important;
+}
+
+/* --- CREDITS --- */
+#credits div {
+    max-width: 90% !important;
+    padding: 12px !important;
+}
+
+/* --- AUTH SCREEN --- */
+#auth div {
+    max-width: 90% !important;
+    padding: 12px !important;
+}
+
+/* --- WEAPON TEST MOBILE --- */
+#weaponTestArea {
+    height: 40vh !important;
+    min-height: 160px !important;
+}
+
+#testHeroWrapper {
+    width: 50px !important;
+    height: 50px !important;
+}
+
+#testHeroImg {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#testWeaponOverlay {
+    width: 25px !important;
+    height: 25px !important;
+    bottom: 6px !important;
+    right: -10px !important;
+}
+
+#testDummy {
+    width: 80px !important;
+    height: 80px !important;
+}
+
+#hitBtn {
+    padding: 10px 25px !important;
+    font-size: 14px !important;
+}
+
+#testStats {
+    max-width: 90% !important;
+    padding: 10px !important;
+}
+
+#testStats p {
+    font-size: 9px !important;
+    margin: 3px 0 !important;
+}
+
+/* --- PET SHOP & BACKPACK GRIDS --- */
+#petShopGrid, #backpackGrid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+    max-width: 100% !important;
+    padding: 0 4px;
+}
+
+/* --- CRAFTING --- */
+#crafting .upgrade-container {
+    max-width: 95% !important;
+    padding: 8px !important;
+}
+
+#crafting div[style*="border: 2px dashed"] {
+    padding: 6px !important;
+    margin-bottom: 6px !important;
+}
+
+#crafting img {
+    width: 24px !important;
+    height: 24px !important;
+    margin-right: 6px !important;
+}
+
+/* --- SCROLLBAR HIDE FOR MOBILE --- */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+}
+
+/* --- PREVENT ZOOM ON INPUT FOCUS --- */
+input:focus {
+    font-size: 16px !important;
+}
+
+/* --- HIDE HAMBURGER/SCROLLBARS --- */
+section {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+}
+
+/* --- SMALL SCREEN ADJUSTMENTS --- */
+@media (max-width: 380px) {
+    .shop-icon {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .menu-btn {
+        padding: 6px 8px !important;
+        font-size: 9px !important;
+    }
+
+    #shopGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    #petShopGrid, #backpackGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* --- LANDSCAPE SPECIFIC --- */
+@media (max-height: 500px) {
+    body {
+        font-size: 9px;
+    }
+
+    .battle-stage-mobile {
+        height: 35vh !important;
+        min-height: 140px !important;
+    }
+
+    #heroWrapper {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    #enemyImg {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    #timerContainer {
+        margin-top: 3px !important;
+        margin-bottom: 3px !important;
+    }
+
+    #inputZone {
+        margin: 5px 0 !important;
+    }
+
+    .mobile-controls {
+        margin-top: 5px !important;
+    }
+
+    section {
+        padding: 10px !important;
+    }
+}
